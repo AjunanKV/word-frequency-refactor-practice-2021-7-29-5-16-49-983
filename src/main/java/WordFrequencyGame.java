@@ -26,7 +26,6 @@ public class WordFrequencyGame {
             return "Calculate Error";
         }
     }
-
     private String joinString(List<WordInfo> wordInfoList) {
         return wordInfoList.stream().map(wordInput -> wordInput.getValue() +SPACE+ wordInput.getWordCount()).collect(Collectors.joining(ENDLINE));
     }
