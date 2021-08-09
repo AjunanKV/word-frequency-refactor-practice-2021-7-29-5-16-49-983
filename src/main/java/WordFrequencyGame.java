@@ -1,25 +1,24 @@
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
 
 public class WordFrequencyGame {
     private static final String BLANKSPACE = "\\s+";
+    private static final CharSequence ENDLINE = "\n";
 
-    public String getResult(String sentence){
+    public String getResult(String sentence) {
 
 
-        if (sentence.split(BLANKSPACE).length==1) {
+        if (sentence.split(BLANKSPACE).length == 1) {
             return sentence + " 1";
         } else {
 
             try {
 
                 List<WordInfo> wordInfoList = calculateWordFrequencyTemporary(sentence);
-
                 sortByCount(wordInfoList);
-
                 return joinString(wordInfoList);
+                
             } catch (Exception e) {
 
 
@@ -29,12 +28,7 @@ public class WordFrequencyGame {
     }
 
     private String joinString(List<WordInfo> wordInfoList) {
-        StringJoiner joiner = new StringJoiner("\n");
-        for (WordInfo w : wordInfoList) {
-            String s = w.getValue() + " " +w.getWordCount();
-            joiner.add(s);
-        }
-        return joiner.toString();
+        return wordInfoList.stream().map(wordInput -> wordInput.getValue() + " " + wordInput.getWordCount()).collect(Collectors.joining(ENDLINE));
     }
 
     private void sortByCount(List<WordInfo> wordInfoList) {
@@ -49,7 +43,7 @@ public class WordFrequencyGame {
 
         distinctWords.forEach(distinctWord -> {
             int count = (int) words.stream().filter(word -> word.equals(distinctWord)).count();
-            WordInfo wordInfo = new WordInfo(distinctWord,count);
+            WordInfo wordInfo = new WordInfo(distinctWord, count);
             wordInfos.add(wordInfo);
         });
 
