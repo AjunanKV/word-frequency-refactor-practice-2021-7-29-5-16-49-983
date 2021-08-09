@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class WordFrequencyGame {
@@ -33,46 +34,18 @@ public class WordFrequencyGame {
     }
 
     private List<WordInfo> calculateWordFrequencyTemporary(String sentence) {
-        //split the input string with 1 to n pieces of spaces
         List<String> words = Arrays.asList(sentence.split(BLANKSPACE));
-        
-        List<WordInfo> inputList = new ArrayList<>();
-        for (String word : words) {
-            WordInfo input = new WordInfo(word, 1);
-            inputList.add(input);
-        }
+        List<String> distinctWords = words.stream().distinct().collect(Collectors.toList());
 
-        //get the map for the next step of sizing the same word
-        Map<String, List<WordInfo>> map =getListMap(inputList);
+        List<WordInfo> wordInfos = new ArrayList<>();
 
-        List<WordInfo> list = new ArrayList<>();
-        for (Map.Entry<String, List<WordInfo>> entry : map.entrySet()){
-            WordInfo input = new WordInfo(entry.getKey(), entry.getValue().size());
-            list.add(input);
-        }
-        inputList = list;
-        return inputList;
+        distinctWords.forEach(distinctWord -> {
+            int count = (int) words.stream().filter(word -> word.equals(distinctWord)).count();
+            WordInfo wordInfo = new WordInfo(distinctWord,count);
+            wordInfos.add(wordInfo);
+        });
+
+        return wordInfos;
     }
-
-
-    private Map<String,List<WordInfo>> getListMap(List<WordInfo> inputList) {
-        Map<String, List<WordInfo>> map = new HashMap<>();
-        for (WordInfo input :  inputList){
-//       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
-            if (!map.containsKey(input.getValue())){
-                ArrayList arr = new ArrayList<>();
-                arr.add(input);
-                map.put(input.getValue(), arr);
-            }
-
-            else {
-                map.get(input.getValue()).add(input);
-            }
-        }
-
-
-        return map;
-    }
-
 
 }
