@@ -11,19 +11,18 @@ public class WordFrequencyGame {
 
         if (sentence.split(BLANKSPACE).length == 1) {
             return sentence + " 1";
-        } else {
+        }
 
-            try {
+        try {
 
-                List<WordInfo> wordInfoList = calculateWordFrequencyTemporary(sentence);
-                sortByCount(wordInfoList);
-                return joinString(wordInfoList);
-                
-            } catch (Exception e) {
+            List<WordInfo> wordInfoList = calculateWordFrequencyTemporary(sentence);
+            sortByCount(wordInfoList);
+            return joinString(wordInfoList);
+
+        } catch (Exception e) {
 
 
-                return "Calculate Error";
-            }
+            return "Calculate Error";
         }
     }
 
