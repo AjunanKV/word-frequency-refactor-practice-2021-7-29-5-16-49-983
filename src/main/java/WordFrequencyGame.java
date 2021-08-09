@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 public class WordFrequencyGame {
     private static final String BLANKSPACE = "\\s+";
     private static final CharSequence ENDLINE = "\n";
-    private static final String SPACE =" ";
+    private static final String SPACE = " ";
 
     public String getResult(String sentence) {
 
@@ -26,8 +26,9 @@ public class WordFrequencyGame {
             return "Calculate Error";
         }
     }
+
     private String joinString(List<WordInfo> wordInfoList) {
-        return wordInfoList.stream().map(wordInput -> wordInput.getValue() +SPACE+ wordInput.getWordCount()).collect(Collectors.joining(ENDLINE));
+        return wordInfoList.stream().map(wordInput -> wordInput.getValue() + SPACE + wordInput.getWordCount()).collect(Collectors.joining(ENDLINE));
     }
 
     private void sortByCount(List<WordInfo> wordInfoList) {
