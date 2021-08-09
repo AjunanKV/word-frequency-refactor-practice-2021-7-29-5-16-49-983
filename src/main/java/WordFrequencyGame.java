@@ -15,12 +15,12 @@ public class WordFrequencyGame {
 
             try {
 
-                List<WordInfo> inputList = calculateWordFrequencyTemporary(sentence);
+                List<WordInfo> wordInfoList = calculateWordFrequencyTemporary(sentence);
 
-                inputList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
+                wordInfoList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
 
                 StringJoiner joiner = new StringJoiner("\n");
-                for (WordInfo w : inputList) {
+                for (WordInfo w : wordInfoList) {
                     String s = w.getValue() + " " +w.getWordCount();
                     joiner.add(s);
                 }
