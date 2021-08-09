@@ -19,18 +19,22 @@ public class WordFrequencyGame {
 
                 sortByCount(wordInfoList);
 
-                StringJoiner joiner = new StringJoiner("\n");
-                for (WordInfo w : wordInfoList) {
-                    String s = w.getValue() + " " +w.getWordCount();
-                    joiner.add(s);
-                }
-                return joiner.toString();
+                return joinString(wordInfoList);
             } catch (Exception e) {
 
 
                 return "Calculate Error";
             }
         }
+    }
+
+    private String joinString(List<WordInfo> wordInfoList) {
+        StringJoiner joiner = new StringJoiner("\n");
+        for (WordInfo w : wordInfoList) {
+            String s = w.getValue() + " " +w.getWordCount();
+            joiner.add(s);
+        }
+        return joiner.toString();
     }
 
     private void sortByCount(List<WordInfo> wordInfoList) {
